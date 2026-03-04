@@ -404,7 +404,7 @@ ARTIFACTS = {
 
     "runbooks": [
         {
-            "title": "QME Platform — Production Deployment Runbook",
+            "title": "Production Deployment Runbook",
             "subtitle": "Dev → staging promotion for a live client system",
             "date": "Feb–Mar 2026",
             "sections": [
@@ -447,7 +447,7 @@ ARTIFACTS = {
 
     "evaluation_harnesses": [
         {
-            "title": "OT Model vs. Deterministic Baseline — ZIP-Level Panel Prediction",
+            "title": "Neural Network OT Model vs. Deterministic Baseline — ZIP-Level Panel Prediction",
             "subtitle": "Proposed, trained on real data, evaluated against the legacy system — model wins, going into production",
             "date": "2025–2026",
             "sections": [
