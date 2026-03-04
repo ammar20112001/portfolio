@@ -6,8 +6,9 @@
 
 <section class="hero">
   <div class="container">
+    <div class="hero-status"><span class="status-dot"></span>Available for senior AI/ML roles</div>
     <h1>{{ profile.name }}</h1>
-    <p class="hero-role">AI/ML Engineer · Karachi, Pakistan</p>
+    <p class="hero-role">AI/ML Engineer · Karachi, Pakistan<span class="cursor">_</span></p>
     <p class="hero-bio">{{ profile.bio }}</p>
     <div class="hero-links">
       <a href="/experience" class="btn btn-primary">Experience</a>
@@ -17,6 +18,32 @@
   </div>
 </section>
 
+<div class="stats-strip-wrap">
+  <div class="container">
+    <div class="stats-strip">
+      <div class="stat-item">
+        <span class="stat-num">3</span>
+        <span class="stat-label">AI systems in production</span>
+      </div>
+      <div class="stat-div"></div>
+      <div class="stat-item">
+        <span class="stat-num">1</span>
+        <span class="stat-label">OT model approved to replace legacy</span>
+      </div>
+      <div class="stat-div"></div>
+      <div class="stat-item">
+        <span class="stat-num">8×A100</span>
+        <span class="stat-label">distributed training</span>
+      </div>
+      <div class="stat-div"></div>
+      <div class="stat-item">
+        <span class="stat-num">~15mo</span>
+        <span class="stat-label">leading AI product development</span>
+      </div>
+    </div>
+  </div>
+</div>
+
 <section>
   <div class="container">
     <div class="section-header">
@@ -24,33 +51,40 @@
       <div class="section-line"></div>
     </div>
 
-    <div class="home-cards">
+    <div class="home-bento">
+
+      <a href="/portfolio#case-studies" class="home-card home-card--featured">
+        <div class="home-card-label">Leadership · Case Study</div>
+        <div class="home-card-title">Led a Full-Stack Migration Under Real Pressure</div>
+        <div class="home-card-desc">
+          Client's requirements outgrew the Flask/Jinja prototype.
+          I made the architectural call to migrate to Vue + FastAPI,
+          negotiated time and budget with the client, aligned the team,
+          reviewed every PR, and shipped in ~1 month under resource constraints.
+          Every future integration now takes a fraction of the time.
+        </div>
+        <div class="home-card-cta">Read case study →</div>
+      </a>
+
       <a href="/portfolio#design-docs" class="home-card">
         <div class="home-card-label">In Production</div>
-        <div class="home-card-title">Three AI Systems</div>
+        <div class="home-card-title">Three AI Systems Running</div>
         <div class="home-card-desc">
           Document intelligence, agentic analytics, and medical billing automation.
-          All running. All mine to operate.
+          All running. All mine to own and operate.
         </div>
       </a>
 
       <a href="/portfolio#case-studies" class="home-card">
-        <div class="home-card-label">Case Study</div>
-        <div class="home-card-title">The Model I Didn't Ship</div>
+        <div class="home-card-label">ML · Pending Production</div>
+        <div class="home-card-title">OT Model Beat the Legacy System</div>
         <div class="home-card-desc">
-          Trained an OT-based neural network, ran the evaluation,
-          and recommended the legacy rules engine. Evidence over sunk cost.
+          Proposed the idea to the client, cleaned the data, trained with W&B,
+          evaluated against the deterministic baseline.
+          The model won. Approved for production.
         </div>
       </a>
 
-      <a href="/about" class="home-card">
-        <div class="home-card-label">Background</div>
-        <div class="home-card-title">ML Engineering + Systems</div>
-        <div class="home-card-desc">
-          PyTorch, LangGraph, RabbitMQ, AWS.
-          Distributed training on 8×A100s. Near-SOTA on AI-generated video detection.
-        </div>
-      </a>
     </div>
   </div>
 </section>
