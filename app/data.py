@@ -30,9 +30,16 @@ EXPERIENCE = [
             "I lead AI product development across three systems: a document intelligence platform "
             "for California workers' compensation, an agentic analytics workflow used by the sales "
             "team daily, and an AI-powered medical billing system that classifies and posts payments end-to-end. "
-            "I set the architecture, review code, coordinate deployments with IT, and communicate directly with clients."
+            "I set the architecture, review code, coordinate deployments with IT, and communicate directly with clients. "
+            "The biggest call I made: scrapping a working Flask/Jinja prototype and leading a full-stack migration "
+            "to Vue + FastAPI when the client's scope expanded beyond what the prototype could carry — "
+            "under time, budget, and developer-resource pressure, shipped in ~1 month."
         ),
         "bullets": [
+            "Led full-stack migration from Flask/Jinja to Vue + FastAPI: made the architectural call when expanding "
+            "CRM requirements outgrew the prototype, drove team alignment, handled all client communication and "
+            "approval cycles, reviewed every PR, revamped the DB schema, and shipped to production in ~1 month "
+            "under developer resource constraints. Every future integration now takes a fraction of the time.",
             "Designed the system architecture for a QME CRM platform — relational schema, layered FastAPI backend, "
             "ELT pipelines, and client-facing analytics dashboards. Led the production deployment: subdomain config, "
             "auth debugging in live environments, DB promotion from dev to staging, and QA sign-off.",
@@ -239,6 +246,60 @@ ARTIFACTS = {
     ],
 
     "case_studies": [
+        {
+            "title": "Scrapping a Working Prototype and Leading a Full-Stack Migration Under Pressure",
+            "subtitle": "Flask/Jinja → Vue + FastAPI · Architecture decision · Team lead · Client negotiation · ~1 month",
+            "date": "2025–2026",
+            "tags": ["Technical Leadership", "System Architecture", "Migration", "Client Communication"],
+            "sections": [
+                {
+                    "heading": "How We Got Here",
+                    "body": (
+                        "The client came in with unclear requirements. The right move was to ship fast — "
+                        "a Flask/Jinja prototype, a few dashboard views, get something in front of them quickly. "
+                        "That's what we did. It worked. But scope expanded: CRM features, more analytical views, "
+                        "AI integrations, multi-user workflows. The prototype wasn't designed for any of that. "
+                        "Flask/Jinja with server-side rendering doesn't scale to a rich, interactive CRM — "
+                        "every new feature would be a fight against the architecture."
+                    ),
+                },
+                {
+                    "heading": "The Decision",
+                    "body": (
+                        "I made the call to migrate. Full-stack: Vue on the front end, FastAPI backend, "
+                        "clean API boundary between them, DB schema revamped to support the actual data model "
+                        "the CRM needed. This wasn't a popular decision — it meant throwing away working code, "
+                        "resetting timelines, and going back to the client to ask for more time and budget. "
+                        "The alternative was continuing to bolt features onto a prototype and accruing debt "
+                        "that would eventually make every future addition a multi-week ordeal."
+                    ),
+                },
+                {
+                    "heading": "What Leading It Actually Looked Like",
+                    "body": (
+                        "Team alignment: got every developer on the same page about the new architecture, "
+                        "the rationale, and the delivery plan before a single line was written. "
+                        "Client communication: drafted the case for the transition — why the prototype couldn't "
+                        "carry the expanded scope, what the migration would cost in time and money, "
+                        "and what we'd get on the other side. Got approval. "
+                        "Execution: PR reviews on every merge, procedure reviews when patterns drifted, "
+                        "DB schema decisions made with the full data model in view, not just the current sprint. "
+                        "Resource shortage meant the team was small and the timeline kept shifting — "
+                        "managed that reality without letting it collapse into chaos."
+                    ),
+                },
+                {
+                    "heading": "The Outcome",
+                    "body": (
+                        "Shipped to production in ~1 month under genuine pressure: tight timeline, limited developers, "
+                        "active client with opinions. The system is now consistent and scalable — "
+                        "every future feature, analytics view, or AI integration plugs into an architecture "
+                        "that was actually designed for it. The prototype got us in the room; "
+                        "the migration is what lets us stay there."
+                    ),
+                },
+            ],
+        },
         {
             "title": "I Proposed a Model, Trained It on Messy Real Data, and Got It Approved for Production",
             "subtitle": "On taking an idea from client pitch to evaluated, production-ready ML system",
