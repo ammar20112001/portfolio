@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}{{ profile.name }}{% endblock %}</title>
+  <meta name="description" content="{{ profile.tagline }}" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <a href="/" class="nav-logo">ammar.jawed</a>
+    <ul class="nav-links">
+      <li><a href="/about" {% if active == 'about' %}class="active"{% endif %}>About</a></li>
+      <li><a href="/experience" {% if active == 'experience' %}class="active"{% endif %}>Experience</a></li>
+      <li><a href="/portfolio" {% if active == 'portfolio' %}class="active"{% endif %}>Portfolio</a></li>
+    </ul>
+  </div>
+</nav>
+
+{% block content %}{% endblock %}
+
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <span class="footer-text">Updated {{ now }}</span>
+      <div class="footer-links">
+        <a href="{{ profile.github }}" target="_blank">GitHub</a>
+        <a href="{{ profile.linkedin }}" target="_blank">LinkedIn</a>
+        <a href="mailto:{{ profile.email }}">Email</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

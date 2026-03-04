@@ -1,0 +1,296 @@
+{% extends "base.html" %}
+
+{% block title %}Portfolio — {{ profile.name }}{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+  <div class="container">
+    <p class="page-eyebrow">Portfolio</p>
+    <h1>Projects & Artifacts</h1>
+    <p>Engineering artifacts from production work. Click any card to read.</p>
+  </div>
+</div>
+
+<!-- ===================== PROJECTS ===================== -->
+<section id="projects">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Projects</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="card-grid">
+      {% for project in projects %}
+      <div class="p-card" onclick="openModal('proj-{{ loop.index0 }}')">
+        <div class="p-card-top">
+          <div class="p-card-title">{{ project.title }}</div>
+          {% if project.get("stars") %}<div class="p-card-stars">★ {{ project.stars }}</div>{% endif %}
+        </div>
+        {% if project.get("summary") %}
+        <div class="p-card-summary">{{ project.summary }}</div>
+        {% endif %}
+        <div class="p-card-footer">
+          <div class="tags">
+            {% for tag in project.tags[:3] %}<span class="tag">{{ tag }}</span>{% endfor %}
+          </div>
+          <span class="card-cta">Read →</span>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ===================== DESIGN DOCS ===================== -->
+<section id="design-docs">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Design Docs</h2>
+      <div class="section-line"></div>
+    </div>
+
+    {% if artifacts.design_docs %}
+    <div class="card-grid">
+      {% for doc in artifacts.design_docs %}
+      <div class="a-card" onclick="openModal('doc-{{ loop.index0 }}')">
+        <div class="a-card-header">
+          <span class="artifact-badge {{ doc.status | lower }}">{{ doc.status }}</span>
+          <span class="a-card-date">{{ doc.date }}</span>
+        </div>
+        <div class="a-card-title">{{ doc.title }}</div>
+        <div class="a-card-sub">{{ doc.subtitle }}</div>
+        <div class="a-card-cta">Read doc →</div>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="artifacts-empty"><div class="empty-code">// in progress</div></div>
+    {% endif %}
+  </div>
+</section>
+
+<!-- ===================== CASE STUDIES ===================== -->
+<section id="case-studies">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Case Studies</h2>
+      <div class="section-line"></div>
+    </div>
+
+    {% if artifacts.case_studies %}
+    <div class="card-grid">
+      {% for cs in artifacts.case_studies %}
+      <div class="a-card" onclick="openModal('cs-{{ loop.index0 }}')">
+        <div class="a-card-header">
+          <span class="a-card-date">{{ cs.date }}</span>
+        </div>
+        <div class="a-card-title">{{ cs.title }}</div>
+        <div class="a-card-sub">{{ cs.subtitle }}</div>
+        <div class="tags" style="margin-top: 12px;">
+          {% for tag in cs.tags %}<span class="tag">{{ tag }}</span>{% endfor %}
+        </div>
+        <div class="a-card-cta">Read case study →</div>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="artifacts-empty"><div class="empty-code">// in progress</div></div>
+    {% endif %}
+  </div>
+</section>
+
+<!-- ===================== RUNBOOKS + EVAL (side by side) ===================== -->
+<section>
+  <div class="container">
+    <div class="two-col">
+
+      <div>
+        <div class="section-header" style="margin-bottom: 20px;">
+          <h2 class="section-title">Runbooks</h2>
+          <div class="section-line"></div>
+        </div>
+        {% if artifacts.runbooks %}
+          {% for rb in artifacts.runbooks %}
+          <div class="a-card" onclick="openModal('rb-{{ loop.index0 }}')">
+            <div class="a-card-title">{{ rb.title }}</div>
+            <div class="a-card-sub">{{ rb.subtitle }}</div>
+            <div class="a-card-date" style="margin-top: 8px;">{{ rb.date }}</div>
+            <div class="a-card-cta">Read runbook →</div>
+          </div>
+          {% endfor %}
+        {% else %}
+          <div class="artifacts-empty"><div class="empty-code">// in progress</div></div>
+        {% endif %}
+      </div>
+
+      <div>
+        <div class="section-header" style="margin-bottom: 20px;">
+          <h2 class="section-title">Eval Harnesses</h2>
+          <div class="section-line"></div>
+        </div>
+        {% if artifacts.evaluation_harnesses %}
+          {% for ev in artifacts.evaluation_harnesses %}
+          <div class="a-card" onclick="openModal('ev-{{ loop.index0 }}')">
+            <div class="a-card-title">{{ ev.title }}</div>
+            <div class="a-card-sub">{{ ev.subtitle }}</div>
+            <div class="a-card-date" style="margin-top: 8px;">{{ ev.date }}</div>
+            <div class="a-card-cta">Read harness →</div>
+          </div>
+          {% endfor %}
+        {% else %}
+          <div class="artifacts-empty"><div class="empty-code">// in progress</div></div>
+        {% endif %}
+
+        <div class="section-header" style="margin-bottom: 20px; margin-top: 32px;">
+          <h2 class="section-title">Postmortems</h2>
+          <div class="section-line"></div>
+        </div>
+        <div class="artifacts-empty">
+          <div class="empty-code">// Q2</div>
+          <p>Coming as systems age.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ===================== MODAL ===================== -->
+<div id="modal-overlay" onclick="closeModal(event)">
+  <div id="modal-box">
+    <button id="modal-close" onclick="closeModal(null, true)">✕</button>
+    <div id="modal-content"></div>
+  </div>
+</div>
+
+
+<!-- ===================== HIDDEN CONTENT ===================== -->
+<div style="display:none" aria-hidden="true">
+
+  {# ---- Projects ---- #}
+  {% for project in projects %}
+  <div id="proj-{{ loop.index0 }}-content">
+    <div class="modal-eyebrow">Project</div>
+    <div class="modal-title">{{ project.title }}</div>
+    {% if project.get("stars") %}
+    <div class="modal-meta">★ {{ project.stars }} GitHub stars</div>
+    {% endif %}
+    <div class="tags" style="margin: 16px 0;">
+      {% for tag in project.tags %}<span class="tag">{{ tag }}</span>{% endfor %}
+    </div>
+    {% for h in project.highlights %}
+    <div class="modal-section">
+      <p class="modal-body">{{ h }}</p>
+    </div>
+    {% endfor %}
+    {% if project.github %}
+    <div style="margin-top: 24px;">
+      <a href="{{ project.github }}" target="_blank" class="modal-link">View on GitHub →</a>
+    </div>
+    {% endif %}
+  </div>
+  {% endfor %}
+
+  {# ---- Design Docs ---- #}
+  {% for doc in artifacts.design_docs %}
+  <div id="doc-{{ loop.index0 }}-content">
+    <div class="modal-eyebrow">Design Doc · {{ doc.date }}</div>
+    <div class="modal-title">{{ doc.title }}</div>
+    <div class="modal-subtitle">{{ doc.subtitle }}</div>
+    <span class="artifact-badge {{ doc.status | lower }}" style="margin-top: 12px; display: inline-block;">{{ doc.status }}</span>
+    {% for section in doc.sections %}
+    <div class="modal-section">
+      <div class="modal-section-heading">{{ section.heading }}</div>
+      {% if section.get("body") %}<p class="modal-body">{{ section.body }}</p>{% endif %}
+      {% if section.get("items") %}
+      <ul class="modal-list">{% for item in section["items"] %}<li>{{ item }}</li>{% endfor %}</ul>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+  {% endfor %}
+
+  {# ---- Case Studies ---- #}
+  {% for cs in artifacts.case_studies %}
+  <div id="cs-{{ loop.index0 }}-content">
+    <div class="modal-eyebrow">Case Study · {{ cs.date }}</div>
+    <div class="modal-title">{{ cs.title }}</div>
+    <div class="modal-subtitle">{{ cs.subtitle }}</div>
+    <div class="tags" style="margin: 14px 0;">
+      {% for tag in cs.tags %}<span class="tag">{{ tag }}</span>{% endfor %}
+    </div>
+    {% for section in cs.sections %}
+    <div class="modal-section">
+      <div class="modal-section-heading">{{ section.heading }}</div>
+      {% if section.get("body") %}<p class="modal-body">{{ section.body }}</p>{% endif %}
+      {% if section.get("items") %}
+      <ul class="modal-list">{% for item in section["items"] %}<li>{{ item }}</li>{% endfor %}</ul>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+  {% endfor %}
+
+  {# ---- Runbooks ---- #}
+  {% for rb in artifacts.runbooks %}
+  <div id="rb-{{ loop.index0 }}-content">
+    <div class="modal-eyebrow">Runbook · {{ rb.date }}</div>
+    <div class="modal-title">{{ rb.title }}</div>
+    <div class="modal-subtitle">{{ rb.subtitle }}</div>
+    {% for section in rb.sections %}
+    <div class="modal-section">
+      <div class="modal-section-heading">{{ section.heading }}</div>
+      {% if section.get("body") %}<p class="modal-body">{{ section.body }}</p>{% endif %}
+      {% if section.get("items") %}
+      <ul class="modal-list">{% for item in section["items"] %}<li>{{ item }}</li>{% endfor %}</ul>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+  {% endfor %}
+
+  {# ---- Evaluation Harnesses ---- #}
+  {% for ev in artifacts.evaluation_harnesses %}
+  <div id="ev-{{ loop.index0 }}-content">
+    <div class="modal-eyebrow">Evaluation Harness · {{ ev.date }}</div>
+    <div class="modal-title">{{ ev.title }}</div>
+    <div class="modal-subtitle">{{ ev.subtitle }}</div>
+    {% for section in ev.sections %}
+    <div class="modal-section">
+      <div class="modal-section-heading">{{ section.heading }}</div>
+      {% if section.get("body") %}<p class="modal-body">{{ section.body }}</p>{% endif %}
+      {% if section.get("items") %}
+      <ul class="modal-list">{% for item in section["items"] %}<li>{{ item }}</li>{% endfor %}</ul>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+  {% endfor %}
+
+</div>
+
+
+<script>
+  function openModal(id) {
+    const src = document.getElementById(id + '-content');
+    if (!src) return;
+    document.getElementById('modal-content').innerHTML = src.innerHTML;
+    document.getElementById('modal-overlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal(e, force) {
+    if (force || (e && e.target === document.getElementById('modal-overlay'))) {
+      document.getElementById('modal-overlay').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeModal(null, true);
+  });
+</script>
+
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Experience — {{ profile.name }}{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+  <div class="container">
+    <p class="page-eyebrow">Experience</p>
+    <h1>Work History</h1>
+    <p>
+      I lead AI product development — setting architecture, shipping to production,
+      and making the call on what doesn't ship.
+    </p>
+  </div>
+</div>
+
+<section>
+  <div class="container">
+    {% for job in experience %}
+    <div class="exp-item">
+      <div class="exp-title">{{ job.title }}</div>
+      <div class="exp-meta">
+        <span class="exp-company">{{ job.company }}</span>
+        <span class="exp-sep">·</span>
+        <span>{{ job.location }}</span>
+        <span class="exp-sep">·</span>
+        <span>{{ job.period }}</span>
+      </div>
+
+      {% if job.lead %}
+      <p class="exp-lead">{{ job.lead }}</p>
+      {% endif %}
+
+      <ul class="exp-list">
+        {% for bullet in job.bullets %}
+        <li>{{ bullet }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% endblock %}

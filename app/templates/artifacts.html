@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Artifacts — {{ profile.name }}{% endblock %}
+
+{% block content %}
+
+<section class="hero" style="padding: 64px 0 48px;">
+  <div class="container">
+    <p class="hero-label">// Engineering Artifacts</p>
+    <h1 style="font-size: 36px;">Artifacts & Case Studies</h1>
+    <p class="hero-sub">
+      Design docs, runbooks, postmortems, evaluation harnesses, and case studies —
+      the evidence trail of architect-grade thinking.
+    </p>
+  </div>
+</section>
+
+{% set artifact_sections = [
+  ("Design Docs", "design_docs", "System architecture, tradeoffs, failure modes, and rollout plans."),
+  ("Case Studies", "case_studies", "Problem → constraints → options → decision → results."),
+  ("Runbooks", "runbooks", "How to operate, debug, and recover production systems."),
+  ("Postmortems", "postmortems", "What broke, why, and what corrective actions were taken."),
+  ("Evaluation Harnesses", "evaluation_harnesses", "Golden sets, regression gates, and quality metrics for AI systems."),
+] %}
+
+{% for title, key, desc in artifact_sections %}
+<section>
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">{{ title }}</h2>
+      <div class="section-line"></div>
+    </div>
+    <p style="color: var(--text-muted); font-size: 13px; margin-bottom: 24px;">{{ desc }}</p>
+
+    {% if artifacts[key] %}
+      <!-- future: render artifact cards here -->
+    {% else %}
+    <div class="artifacts-empty">
+      <span style="font-family: var(--font-mono); font-size: 13px; color: var(--text-dim);">
+        // coming soon
+      </span>
+      <p>Being built from daily work at Appedology — Q1 in progress.</p>
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}{{ profile.name }}{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+  <div class="container">
+    <h1>{{ profile.name }}</h1>
+    <p class="hero-role">AI/ML Engineer · Karachi, Pakistan</p>
+    <p class="hero-bio">{{ profile.bio }}</p>
+    <div class="hero-links">
+      <a href="/experience" class="btn btn-primary">Experience</a>
+      <a href="/portfolio" class="btn btn-outline">Portfolio</a>
+      <a href="{{ profile.github }}" class="btn btn-outline" target="_blank">GitHub</a>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Currently</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="home-cards">
+      <a href="/portfolio#design-docs" class="home-card">
+        <div class="home-card-label">In Production</div>
+        <div class="home-card-title">Three AI Systems</div>
+        <div class="home-card-desc">
+          Document intelligence, agentic analytics, and medical billing automation.
+          All running. All mine to operate.
+        </div>
+      </a>
+
+      <a href="/portfolio#case-studies" class="home-card">
+        <div class="home-card-label">Case Study</div>
+        <div class="home-card-title">The Model I Didn't Ship</div>
+        <div class="home-card-desc">
+          Trained an OT-based neural network, ran the evaluation,
+          and recommended the legacy rules engine. Evidence over sunk cost.
+        </div>
+      </a>
+
+      <a href="/about" class="home-card">
+        <div class="home-card-label">Background</div>
+        <div class="home-card-title">ML Engineering + Systems</div>
+        <div class="home-card-desc">
+          PyTorch, LangGraph, RabbitMQ, AWS.
+          Distributed training on 8×A100s. Near-SOTA on AI-generated video detection.
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

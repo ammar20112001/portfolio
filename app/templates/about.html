@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block title %}About — {{ profile.name }}{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+  <div class="container">
+    <p class="page-eyebrow">About</p>
+    <h1>{{ profile.name }}</h1>
+    <p>
+      AI/ML Engineer based in Karachi, Pakistan. I build production AI systems —
+      document intelligence, agentic workflows, distributed training, and data pipelines.
+      I'm on a deliberate path toward solutions architecture: ship real systems,
+      operate them under failure, document tradeoffs, leave an evidence trail.
+    </p>
+  </div>
+</div>
+
+<section>
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Skills</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="skills-grid">
+      {% for category, items in skills.items() %}
+      <div class="skill-group">
+        <div class="skill-category">{{ category }}</div>
+        <div class="skill-items">
+          {% for item in items %}
+          <span class="skill-item">{{ item }}</span>
+          {% endfor %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Education</h2>
+      <div class="section-line"></div>
+    </div>
+    {% for edu in education %}
+    <div class="edu-item">
+      <div class="edu-degree">{{ edu.degree }}</div>
+      <div class="edu-meta">{{ edu.institution }} &nbsp;·&nbsp; {{ edu.period }}</div>
+      <ul class="cert-list">
+        {% for cert in edu.certifications %}
+        <li>{{ cert }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Contact</h2>
+      <div class="section-line"></div>
+    </div>
+    <p style="margin-bottom: 20px;">
+      Open to interesting work, collaboration, and conversations about AI systems engineering.
+    </p>
+    <div style="display: flex; flex-direction: column; gap: 10px;">
+      <div style="font-size: 15px; color: var(--text-muted);">
+        Email &nbsp;—&nbsp; <a href="mailto:{{ profile.email }}">{{ profile.email }}</a>
+      </div>
+      <div style="font-size: 15px; color: var(--text-muted);">
+        GitHub &nbsp;—&nbsp; <a href="{{ profile.github }}" target="_blank">{{ profile.github }}</a>
+      </div>
+      <div style="font-size: 15px; color: var(--text-muted);">
+        LinkedIn &nbsp;—&nbsp; <a href="{{ profile.linkedin }}" target="_blank">{{ profile.linkedin }}</a>
+      </div>
+      <div style="font-size: 15px; color: var(--text-muted);">
+        Location &nbsp;—&nbsp; {{ profile.location }}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
