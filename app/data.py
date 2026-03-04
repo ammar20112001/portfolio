@@ -342,45 +342,46 @@ ARTIFACTS = {
     "evaluation_harnesses": [
         {
             "title": "OT Model vs. Deterministic Baseline — ZIP-Level Panel Prediction",
-            "subtitle": "How the model was evaluated and why it earned the right to ship",
+            "subtitle": "Proposed, trained on real data, evaluated against the legacy system — model wins, going into production",
             "date": "2025–2026",
             "sections": [
                 {
-                    "heading": "Setup",
+                    "heading": "Context",
+                    "body": (
+                        "The existing system used a deterministic heuristic — eratio / 12 — "
+                        "to estimate panel demand by ZIP code. I proposed to the client that a learned model "
+                        "could do meaningfully better by capturing temporal trends, geographic structure, "
+                        "and supply-demand dynamics that a fixed formula can't represent. "
+                        "They approved the experiment. I gathered the data, cleaned it, and built the pipeline."
+                    ),
+                },
+                {
+                    "heading": "Evaluation Setup",
                     "body": (
                         "Monthly batch pkl files (one per month-specialty pair). "
                         "Hold-out: month index 11. "
                         "Inference at eps=0.03 (matching training end), b_hat rescaled to raw panel count "
                         "via actual_total / demand_total. "
-                        "Baseline: eratio / 12 from the deterministic pczip table."
+                        "Baseline: eratio / 12 from the deterministic pczip table. "
+                        "All training runs tracked on W&B — loss curves, rank metrics, geographic residual maps."
                     ),
                 },
                 {
                     "heading": "Metrics",
                     "items": [
-                        "Spearman rank correlation — the primary metric. Sales team needs rank order, not absolute counts.",
+                        "Spearman rank correlation — primary metric. Sales team needs rank order, not absolute counts.",
                         "Pearson correlation — linear agreement as secondary signal.",
-                        "Residual scatter: actual panels vs. (actual − predicted) to detect geographic systematic bias.",
+                        "Residual scatter: actual panels vs. (actual − predicted) to detect systematic geographic bias.",
                         "Geographic maps: turbo colormap scatter of actual, predicted, and difference across California lat/long.",
                     ],
                 },
                 {
-                    "heading": "What the Evaluation Showed",
+                    "heading": "Result",
                     "body": (
-                        "OT model Spearman meaningfully exceeded the deterministic baseline. "
+                        "The OT model outperformed the deterministic baseline by a significant margin on Spearman rank correlation. "
                         "Residual maps showed the model capturing geographic demand patterns the heuristic missed — "
                         "particularly in underserved ZIP clusters with high panel volume but low QME density. "
-                        "Decision: ship. The model earns its complexity."
-                    ),
-                },
-                {
-                    "heading": "Lesson",
-                    "body": (
-                        "This evaluation was built after training, not before. "
-                        "The right order: define the success metric, build the evaluation harness, "
-                        "establish the baseline, then decide whether to build the model at all. "
-                        "Building the harness upfront forces the question early — "
-                        "and gives you a confident answer when the model does win."
+                        "Decision: ship. Planned for production deployment to replace the legacy system."
                     ),
                 },
             ],
