@@ -294,59 +294,6 @@ ARTIFACTS = {
                 },
             ],
         },
-        {
-            "title": "Extracting Structure from California Workers' Comp Documents",
-            "subtitle": "LLM vision extraction on handwritten legal forms at production scale",
-            "date": "2025–2026",
-            "tags": ["Document AI", "LLM Vision", "OCR", "Prompt Engineering"],
-            "sections": [
-                {
-                    "heading": "The Document",
-                    "body": (
-                        "California DWC Form 107 is a legal panel packet: a printed table of 3 QME doctors, "
-                        "with strike annotations that can be handwritten in the margin, stamped over a doctor's block, "
-                        "or stated explicitly in a separate letter attached to the packet. "
-                        "Two parties (applicant attorney and defense attorney) each strike one doctor. "
-                        "The remaining doctor is the selected QME. "
-                        "Getting this wrong means the wrong doctor is recorded — a legal error."
-                    ),
-                },
-                {
-                    "heading": "The Hard Part",
-                    "body": (
-                        "Strike resolution. A strike annotation might be a handwritten 'DA strike' over one of "
-                        "three physician blocks, or it might be a rubber stamp placed ambiguously between two blocks, "
-                        "or it might only appear in a letter three pages later. "
-                        "The extraction system must use all pages simultaneously, reconcile evidence from multiple sources, "
-                        "and flag conflicts rather than guess. "
-                        "Resolution hierarchy: explicit letter > clear stamp/handwriting over one block > ambiguous overlay. "
-                        "Every strike gets a confidence score (0–1) and a needs_review flag. "
-                        "Below 0.80 or any conflict: human review queue, not auto-insert."
-                    ),
-                },
-                {
-                    "heading": "Results",
-                    "body": (
-                        "Extracting panel metadata, all 5 parties, 3 QMEs with full contact and education details, "
-                        "and both strikes across dozens of ZIP codes. "
-                        "Example: Panel 3670886 — correctly extracted all 3 chiropractic QMEs, "
-                        "identified the DA strike on Dr. Skala at confidence 0.90, "
-                        "flagged the AA strike as needs_review (no evidence in the document). "
-                        "The operations team's manual processing load dropped significantly."
-                    ),
-                },
-                {
-                    "heading": "What's Next",
-                    "body": (
-                        "A curated golden set of 50–100 labeled packets with known correct extractions. "
-                        "A regression suite that runs on every prompt change — because prompt changes are "
-                        "silent regressions waiting to happen. "
-                        "Error taxonomy to understand which failure modes (low-quality scan, ambiguous overlay, "
-                        "missing letter) appear at what frequency."
-                    ),
-                },
-            ],
-        },
     ],
 
     "runbooks": [
