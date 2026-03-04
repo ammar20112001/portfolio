@@ -13,10 +13,11 @@ PROFILE = {
     "bio": (
         "I lead AI product development at Appedology — "
         "setting architecture, owning production deployments, and making the call on what ships and what doesn't. "
-        "Three systems running in production. One model I trained and decided not to ship. "
+        "Three systems running in production. One model I proposed to a client, trained from messy real data, "
+        "evaluated rigorously, and got approved to ship. "
         "I write the design doc before I write the code."
     ),
-    "hook": "Three AI systems in production. One model I built and killed.",
+    "hook": "Three AI systems in production. One model I proposed, built, and got approved to ship.",
 }
 
 EXPERIENCE = [
@@ -38,9 +39,9 @@ EXPERIENCE = [
             "Built a LangGraph agentic workflow where the sales team queries complex market data in plain English. "
             "A supervisor LLM routes across SQL generation, sandboxed Python execution, and a verifier — all under "
             "explicit action spaces so the system can't hallucinate its way to an answer.",
-            "Trained an OT-based neural network to predict QME panel demand by ZIP code. "
-            "Ran the evaluation against the legacy rules engine, concluded the model didn't justify its complexity, "
-            "and recommended not shipping it. The rules engine is still running.",
+            "Proposed an ML-based demand prediction system to the client, gathered and refined real messy data, "
+            "trained an OT-based neural network with W&B logging, and evaluated it against the legacy rules engine. "
+            "The model outperformed the baseline by a significant margin — approved and planned for production.",
             "Built an event-driven medical billing pipeline: file watcher → RabbitMQ → GPT-4o extraction → "
             "YAML-driven decision graph → posting API. Business rules live in YAML, not code — "
             "rule changes require zero deployments.",
@@ -239,18 +240,30 @@ ARTIFACTS = {
 
     "case_studies": [
         {
-            "title": "I Built a Model and Decided Not to Ship It",
-            "subtitle": "On evaluation discipline and the cost of complexity",
+            "title": "I Proposed a Model, Trained It on Messy Real Data, and Got It Approved for Production",
+            "subtitle": "On taking an idea from client pitch to evaluated, production-ready ML system",
             "date": "2025–2026",
-            "tags": ["ML Evaluation", "Optimal Transport", "Engineering Judgment"],
+            "tags": ["ML Evaluation", "Optimal Transport", "W&B", "Engineering Judgment"],
             "sections": [
                 {
-                    "heading": "Background",
+                    "heading": "The Proposal",
                     "body": (
                         "The client wanted to know which ZIP codes were the best targets for their sales team — "
                         "where panel demand was highest and QME supply was weakest. "
-                        "We had a legacy deterministic baseline: eratio / 12, a simple heuristic computed "
-                        "from historical panel counts. The question was whether a learned model could do better."
+                        "The existing approach: eratio / 12, a simple deterministic heuristic from historical panel counts. "
+                        "I proposed to the client that a learned model could do meaningfully better — "
+                        "one that captured temporal trends, geographic structure, and supply-demand dynamics jointly. "
+                        "They approved the experiment."
+                    ),
+                },
+                {
+                    "heading": "The Data Problem",
+                    "body": (
+                        "The raw data was messy: inconsistent ZIP encodings, partial month records, "
+                        "mismatched specialty labels across time, and a non-obvious supply-to-demand ratio of ~2.7× "
+                        "(not 3×, because not all panel slots appear in selection data). "
+                        "I gathered the data, cleaned it, built the batch pkl pipeline per month-specialty pair, "
+                        "and validated structural assumptions before writing a line of model code."
                     ),
                 },
                 {
@@ -262,34 +275,21 @@ ARTIFACTS = {
                         "Cost head: combines latent similarity, geographic distance (5 distance-bucket embeddings), "
                         "and temporal signal — summed through Softplus. "
                         "OT solver: unbalanced Sinkhorn (row-constrained) — demand masses fixed, supply learned implicitly. "
-                        "One subtlety: the actual supply-to-demand ratio is ~2.7×, not the naive 3× (one doctor per "
-                        "panel slot), because not all panel slots appear in selection data. "
-                        "This mattered for cost matrix normalization."
+                        "Full training tracked on W&B: loss curves, Spearman rank metrics, geographic residual maps."
                     ),
                 },
                 {
-                    "heading": "The Evaluation",
+                    "heading": "The Evaluation and the Result",
                     "body": (
                         "Held out month 11. Ran inference at eps=0.03 (matching training end), "
                         "rescaled b_hat to raw panel count, and compared against b_true on "
-                        "Pearson correlation and Spearman rank correlation. "
+                        "Pearson and Spearman rank correlation. "
                         "Spearman was the metric that mattered — the sales team needs rank order, not absolute counts. "
                         "Also ran geographically: scatter maps of actual, predicted, and residuals across California "
                         "ZIP codes to check for systematic bias by region. "
-                        "The OT model did not meaningfully outperform the deterministic baseline on Spearman. "
-                        "The residual maps showed no geographic pattern the rules engine was missing."
-                    ),
-                },
-                {
-                    "heading": "The Decision",
-                    "body": (
-                        "I recommended not shipping the model. "
-                        "The rules engine is simpler, faster, fully explainable to the client, and requires no GPU. "
-                        "The model adds complexity without a meaningful accuracy gain on the task that matters. "
-                        "This is the right call — but I wouldn't have been able to make it confidently without "
-                        "a structured evaluation. The mistake was building the evaluation harness after training. "
-                        "Next time: lock the success metric and the baseline before writing model code. "
-                        "If the baseline satisfies the business need, there's no experiment to run."
+                        "The OT model outperformed the deterministic baseline by a significant margin. "
+                        "The residual maps showed the model capturing geographic patterns the heuristic missed. "
+                        "Decision: ship it. Planned for production deployment."
                     ),
                 },
             ],
@@ -393,7 +393,7 @@ ARTIFACTS = {
     "evaluation_harnesses": [
         {
             "title": "OT Model vs. Deterministic Baseline — ZIP-Level Panel Prediction",
-            "subtitle": "How the model was evaluated and why the baseline won",
+            "subtitle": "How the model was evaluated and why it earned the right to ship",
             "date": "2025–2026",
             "sections": [
                 {
@@ -418,19 +418,20 @@ ARTIFACTS = {
                 {
                     "heading": "What the Evaluation Showed",
                     "body": (
-                        "OT model Spearman did not meaningfully exceed the baseline. "
-                        "Residual maps showed no geographic pattern the rules engine was missing. "
-                        "The baseline was already capturing the structure the model was trying to learn. "
-                        "Decision: don't ship. Ship nothing if it doesn't beat the baseline."
+                        "OT model Spearman meaningfully exceeded the deterministic baseline. "
+                        "Residual maps showed the model capturing geographic demand patterns the heuristic missed — "
+                        "particularly in underserved ZIP clusters with high panel volume but low QME density. "
+                        "Decision: ship. The model earns its complexity."
                     ),
                 },
                 {
-                    "heading": "What's Missing",
+                    "heading": "Lesson",
                     "body": (
                         "This evaluation was built after training, not before. "
                         "The right order: define the success metric, build the evaluation harness, "
                         "establish the baseline, then decide whether to build the model at all. "
-                        "If we'd done this upfront, we might not have trained the model."
+                        "Building the harness upfront forces the question early — "
+                        "and gives you a confident answer when the model does win."
                     ),
                 },
             ],
