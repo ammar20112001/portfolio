@@ -164,7 +164,7 @@ ARTIFACTS = {
 
     "design_docs": [
         {
-            "title": "AI Cheque Posting — Automating Medical Billing End-to-End",
+            "title": "Automating Medical Billing End-to-End",
             "subtitle": "Event-driven pipeline · YAML-driven decision graph · Zero-deployment rule changes",
             "date": "2025–2026",
             "status": "Production",
@@ -173,9 +173,9 @@ ARTIFACTS = {
                     "heading": "The Problem",
                     "body": (
                         "Workers' compensation billing is genuinely complex. Each payment needs to be "
-                        "classified — Billing, ReBilling, Appeal, Settlement, BoardRep — against a web of "
+                        "classified into one of several payment categories against a web of "
                         "insurance-specific rules, date windows, CPT code verifications, and provider contracts. "
-                        "The team was doing this by hand, reading PDFs, and entering data into MedFlow. "
+                        "The team was doing this by hand, reading PDFs, and entering data into the database. "
                         "The goal was to automate from document drop to posted payment, with human review "
                         "only for exceptions."
                     ),
@@ -337,7 +337,7 @@ ARTIFACTS = {
                     "body": (
                         "The client wanted to know which ZIP codes were the best targets for their sales team — "
                         "where panel demand was highest and QME supply was weakest. "
-                        "The existing approach: eratio / 12, a simple deterministic heuristic from historical panel counts. "
+                        "The existing approach: a simple deterministic heuristic derived from historical panel counts. "
                         "I proposed to the client that a learned model could do meaningfully better — "
                         "one that captured temporal trends, geographic structure, and supply-demand dynamics jointly. "
                         "They approved the experiment."
@@ -435,7 +435,7 @@ ARTIFACTS = {
                 {
                     "heading": "Context",
                     "body": (
-                        "The existing system used a deterministic heuristic — eratio / 12 — "
+                        "The existing system used a simple deterministic heuristic "
                         "to estimate panel demand by ZIP code. I proposed to the client that a learned model "
                         "could do meaningfully better by capturing temporal trends, geographic structure, "
                         "and supply-demand dynamics that a fixed formula can't represent. "
@@ -449,7 +449,7 @@ ARTIFACTS = {
                         "Hold-out: month index 11. "
                         "Inference at eps=0.03 (matching training end), b_hat rescaled to raw panel count "
                         "via actual_total / demand_total. "
-                        "Baseline: eratio / 12 from the deterministic pczip table. "
+                        "Baseline: deterministic heuristic from the legacy statistical table. "
                         "All training runs tracked on W&B — loss curves, rank metrics, geographic residual maps."
                     ),
                 },
