@@ -327,7 +327,9 @@ ARTIFACTS = {
                     "items": [
                         "Schema mismatch: staging DB lagging behind dev is the most common deployment failure. Always diff first.",
                         "OAuth in live: cookie/session config behaves differently outside localhost. Verify SESSION_SECRET and ALLOWED_ORIGINS match the live domain.",
-                        "Clustering wrong regions: the heuristic is sensitive to city/sub-region data. Validate after any geography update.",
+                        "Analytics dashboard integrity: spot-check all views after every deployment — panel volume trends, ZIP-level demand maps, specialty breakdowns, doctor office movement, and competitor coverage gaps. A silent data bug in any one view will mislead the sales team without raising an error.",
+                        "Data integrity gate: every schema migration, upstream data change, or ELT pipeline update must go through a QA review before staging promotion. Compare row counts, key distributions, and known-correct aggregate values against dev baselines.",
+                        "Procedure update review: any change to business logic — clustering heuristics, date window calculations, specialty mappings — requires a PR with explicit before/after output comparison on a fixed sample dataset. No logic change merges without a reviewer sign-off on the diff.",
                         "File upload artifact: upstream export includes 3 stale header rows. Strip them before import.",
                     ],
                 },
