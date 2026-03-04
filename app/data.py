@@ -12,10 +12,10 @@ PROFILE = {
     "twitter": "https://twitter.com/ammar_20112001",
     "bio": (
         "I lead AI product development at Appedology — "
-        "setting architecture, owning production deployments, and responsible for what ships and what doesn't. "
+        "setting architecture, handling production deployments, and responsible for what ships and what doesn't. "
         "Three systems running in production. One model I proposed to a client, trained from messy real data, "
         "evaluated rigorously, and got approved to ship. "
-        "I write the design doc before I write the code."
+        "Design doc first, code second."
     ),
     "hook": "Three AI systems in production. One model I proposed, built, and got approved to ship.",
 }
