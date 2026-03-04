@@ -29,7 +29,7 @@
       </div>
 
       {% if job.lead %}
-      <p class="exp-lead">{{ job.lead }}</p>
+      <div class="exp-lead">{% for s in job.lead.split('. ') %}{% if s.strip() %}<span class="modal-sentence">{{ s.strip() }}{% if not s.strip().endswith('.') %}.{% endif %}</span>{% endif %}{% endfor %}</div>
       {% endif %}
 
       <ul class="exp-list">

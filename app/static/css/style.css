@@ -228,8 +228,8 @@ nav .container {
 .hero-bio {
   font-size: 17px;
   color: var(--text-muted);
-  max-width: 580px;
-  line-height: 1.75;
+  max-width: 55ch;
+  line-height: 1.85;
   margin-bottom: 36px;
 }
 
@@ -363,9 +363,11 @@ section:last-child { border-bottom: none; }
 .exp-lead {
   font-size: 15px;
   color: var(--text);
-  line-height: 1.75;
-  margin-bottom: 20px;
-  max-width: 720px;
+  line-height: 1.85;
+  margin-bottom: 24px;
+  max-width: 60ch;
+  border-left: 2px solid rgba(91,156,246,0.35);
+  padding-left: 16px;
 }
 
 .exp-section-label {
@@ -380,16 +382,23 @@ section:last-child { border-bottom: none; }
 .exp-list { list-style: none; padding: 0; }
 .exp-list li {
   position: relative;
-  padding: 7px 0 7px 22px;
+  padding: 14px 0 14px 22px;
   font-size: 15px;
   color: var(--text-muted);
-  line-height: 1.7;
+  line-height: 1.8;
+  max-width: 60ch;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.exp-list li:last-child { border-bottom: none; }
+.exp-list li::first-line {
+  color: var(--text);
+  font-weight: 500;
 }
 .exp-list li::before {
   content: "→";
   position: absolute;
   left: 0;
-  top: 8px;
+  top: 16px;
   color: var(--accent);
   font-size: 12px;
   opacity: 0.5;
@@ -881,14 +890,15 @@ footer {
   color: var(--text);
   line-height: 1.25;
   letter-spacing: -0.02em;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
 .modal-subtitle {
-  font-size: 15px;
+  font-size: 14px;
   color: var(--text-muted);
-  line-height: 1.65;
-  margin-bottom: 4px;
+  line-height: 1.7;
+  margin-bottom: 6px;
+  max-width: 55ch;
 }
 
 .modal-meta {
@@ -898,46 +908,68 @@ footer {
   margin-bottom: 4px;
 }
 
+/* ---- Modal section cards ---- */
 .modal-section {
-  padding: 18px 0;
-  border-top: 1px solid var(--border);
+  padding: 18px 20px;
+  margin: 10px 0;
+  border-left: 2px solid rgba(91,156,246,0.35);
+  background: rgba(255,255,255,0.015);
+  border-radius: 0 var(--radius) var(--radius) 0;
 }
 
 .modal-section-heading {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 11.5px;
   color: var(--accent);
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
+/* ---- Modal body text — scannable ---- */
 .modal-body {
   font-size: 15px;
   color: var(--text-muted);
-  line-height: 1.8;
-  max-width: 100%;
+  line-height: 1.85;
+  max-width: 60ch;
 }
 
+.modal-body::first-line {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.modal-sentence {
+  display: block;
+  margin-bottom: 6px;
+}
+
+/* ---- Modal list items — breathable ---- */
 .modal-list {
   list-style: none;
   padding: 0;
 }
 .modal-list li {
   position: relative;
-  padding: 5px 0 5px 20px;
+  padding: 10px 0 10px 22px;
   font-size: 15px;
   color: var(--text-muted);
-  line-height: 1.7;
+  line-height: 1.8;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
 }
+.modal-list li:last-child { border-bottom: none; }
 .modal-list li::before {
   content: "→";
   position: absolute;
   left: 0;
-  top: 6px;
+  top: 12px;
   font-size: 11px;
   color: var(--accent);
-  opacity: 0.6;
+  opacity: 0.7;
+}
+.modal-list li::first-line {
+  color: var(--text);
+  font-weight: 500;
 }
 
 .modal-link {

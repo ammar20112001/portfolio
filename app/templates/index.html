@@ -9,7 +9,7 @@
     <div class="hero-status"><span class="status-dot"></span>Available for senior AI/ML roles</div>
     <h1>{{ profile.name }}</h1>
     <p class="hero-role">AI/ML Engineer · Karachi, Pakistan<span class="cursor">_</span></p>
-    <p class="hero-bio">{{ profile.bio }}</p>
+    <div class="hero-bio">{% for s in profile.bio.split('. ') %}{% if s.strip() %}<span class="modal-sentence">{{ s.strip() }}{% if not s.strip().endswith('.') %}.{% endif %}</span>{% endif %}{% endfor %}</div>
     <div class="hero-links">
       <a href="/static/Resume.pdf" class="btn btn-primary" download="Ammar_Jawed_Resume.pdf">Resume</a>
       <a href="/experience" class="btn btn-outline">Experience</a>

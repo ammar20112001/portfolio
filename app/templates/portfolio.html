@@ -206,7 +206,7 @@
     {% for section in doc.sections %}
     <div class="modal-section">
       <div class="modal-section-heading">{{ section.heading }}</div>
-      {% if section.get("body") %}<p class="modal-body">{{ section.body }}</p>{% endif %}
+      {% if section.get("body") %}<div class="modal-body">{% for s in section.body.split('. ') %}{% if s.strip() %}<span class="modal-sentence">{{ s.strip() }}{% if not s.strip().endswith('.') %}.{% endif %}</span>{% endif %}{% endfor %}</div>{% endif %}
       {% if section.get("items") %}
       <ul class="modal-list">{% for item in section["items"] %}<li>{{ item }}</li>{% endfor %}</ul>
       {% endif %}
@@ -227,7 +227,7 @@
     {% for section in cs.sections %}
     <div class="modal-section">
       <div class="modal-section-heading">{{ section.heading }}</div>
-      {% if section.get("body") %}<p class="modal-body">{{ section.body }}</p>{% endif %}
+      {% if section.get("body") %}<div class="modal-body">{% for s in section.body.split('. ') %}{% if s.strip() %}<span class="modal-sentence">{{ s.strip() }}{% if not s.strip().endswith('.') %}.{% endif %}</span>{% endif %}{% endfor %}</div>{% endif %}
       {% if section.get("items") %}
       <ul class="modal-list">{% for item in section["items"] %}<li>{{ item }}</li>{% endfor %}</ul>
       {% endif %}
@@ -245,7 +245,7 @@
     {% for section in rb.sections %}
     <div class="modal-section">
       <div class="modal-section-heading">{{ section.heading }}</div>
-      {% if section.get("body") %}<p class="modal-body">{{ section.body }}</p>{% endif %}
+      {% if section.get("body") %}<div class="modal-body">{% for s in section.body.split('. ') %}{% if s.strip() %}<span class="modal-sentence">{{ s.strip() }}{% if not s.strip().endswith('.') %}.{% endif %}</span>{% endif %}{% endfor %}</div>{% endif %}
       {% if section.get("items") %}
       <ul class="modal-list">{% for item in section["items"] %}<li>{{ item }}</li>{% endfor %}</ul>
       {% endif %}
@@ -263,7 +263,7 @@
     {% for section in ev.sections %}
     <div class="modal-section">
       <div class="modal-section-heading">{{ section.heading }}</div>
-      {% if section.get("body") %}<p class="modal-body">{{ section.body }}</p>{% endif %}
+      {% if section.get("body") %}<div class="modal-body">{% for s in section.body.split('. ') %}{% if s.strip() %}<span class="modal-sentence">{{ s.strip() }}{% if not s.strip().endswith('.') %}.{% endif %}</span>{% endif %}{% endfor %}</div>{% endif %}
       {% if section.get("items") %}
       <ul class="modal-list">{% for item in section["items"] %}<li>{{ item }}</li>{% endfor %}</ul>
       {% endif %}
