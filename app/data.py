@@ -244,6 +244,72 @@ ARTIFACTS = {
             ],
         },
         {
+            "title": "Market Intelligence Analytics Dashboard",
+            "subtitle": "Five analysis modules · Stored procedure architecture · Geographic clustering · In production",
+            "date": "2025–2026",
+            "status": "Production",
+            "sections": [
+                {
+                    "heading": "What It Is",
+                    "body": (
+                        "A market intelligence platform built from scratch for the sales team — "
+                        "used to analyze a doctor's competitive position, track historical panel performance, "
+                        "map office locations over time, and recommend where to open new offices based on "
+                        "supply/demand data. It's used in live client pitches and has converted prospects into clients. "
+                        "The system is in production. I designed the architecture, built all five analysis modules, "
+                        "and led it from prototype to deployment."
+                    ),
+                },
+                {
+                    "heading": "The Five Analysis Modules",
+                    "items": [
+                        "Competitor Analysis: for a given doctor, surfaces their top 10 competitors by specialty, "
+                        "computes pairwise overlap across specialties, and identifies which competitors appear "
+                        "across all specialty categories simultaneously.",
+                        "Historical Analysis: panel performance by ZIP code over time — year-by-ZIP pivot tables, "
+                        "monthly trend breakdowns, and cross-specialty comparisons. All paginated for the frontend.",
+                        "Office Movement Analysis: tracks where a doctor has held offices year by year. "
+                        "Addresses are geocoded (with ZIP centroid fallback when geocoding fails) "
+                        "and plotted on a map alongside the doctor's home location.",
+                        "New Office Recommendation: the most complex module. Given a doctor's home ZIP and "
+                        "existing office footprint, recommends new office locations ranked by supply/demand ratio. "
+                        "Accounts for geographic clusters, airport proximity, travel distance constraints, "
+                        "and pre-sourced office spaces.",
+                        "Current Office Analysis: evaluates a doctor's active office locations — panel performance, "
+                        "specialty breakdown per office, management company mappings, and geocoded locations.",
+                    ],
+                },
+                {
+                    "heading": "Key Design Decisions",
+                    "body": (
+                        "All database queries run through stored procedures, not inline SQL. "
+                        "This keeps business logic in one place and makes the Python layer thin and testable. "
+                        "The New Office Recommendation module uses a two-pass IQR algorithm to compute each doctor's "
+                        "effective travel radius dynamically from their existing office distances — "
+                        "rather than a fixed threshold. This produces a personalized radius per doctor "
+                        "that reflects their actual practice geography. "
+                        "Geocoding has a structured fallback: attempt address geocoding first, "
+                        "fall back to ZIP centroid if it fails — the system never silently drops a location. "
+                        "All analysis results are typed dataclasses (CompetitorResults, HistoricalResults, etc.) "
+                        "that serialize to dicts, enabling result caching and frontend reload without re-running expensive analyses. "
+                        "Both CompetitorAnalysis and HistoricalAnalysis have paginated variants — "
+                        "the same analysis class handles both full and paginated execution paths."
+                    ),
+                },
+                {
+                    "heading": "What's Coming — CRM Integration",
+                    "body": (
+                        "The analytics dashboard is one part of a larger platform. "
+                        "The CRM layer — currently in development — will bring client management, "
+                        "onboarding workflows, and activity tracking into the same system. "
+                        "The Vue + FastAPI stack was chosen specifically to support this expansion: "
+                        "the analytics API and the CRM API share the same backend, "
+                        "and the frontend can compose views from both without architectural changes."
+                    ),
+                },
+            ],
+        },
+        {
             "title": "LangGraph Agentic Analytics — NL to Validated Answer",
             "subtitle": "Supervisor routing · Explicit action spaces · Verifier before every response",
             "date": "2025–2026",
