@@ -173,8 +173,9 @@ nav .container {
 .stat-label {
   font-size: 11px;
   color: var(--text-dim);
-  white-space: nowrap;
   letter-spacing: 0.02em;
+  line-height: 1.5;
+  min-height: 2.4em;
 }
 
 .stat-div {

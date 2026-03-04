@@ -12,7 +12,7 @@ PROFILE = {
     "twitter": "https://twitter.com/ammar_20112001",
     "bio": (
         "I lead AI product development at Appedology — "
-        "setting architecture, owning production deployments, and making the call on what ships and what doesn't. "
+        "setting architecture, owning production deployments, and responsible for what ships and what doesn't. "
         "Three systems running in production. One model I proposed to a client, trained from messy real data, "
         "evaluated rigorously, and got approved to ship. "
         "I write the design doc before I write the code."
@@ -292,7 +292,7 @@ ARTIFACTS = {
                 {
                     "heading": "The Decision",
                     "body": (
-                        "I made the call to migrate. Full-stack: Vue on the front end, FastAPI backend, "
+                        "The decision: migrate fully. Vue on the front end, FastAPI backend, "
                         "clean API boundary between them, DB schema revamped to support the actual data model "
                         "the CRM needed. This wasn't a popular decision — it meant throwing away working code, "
                         "resetting timelines, and going back to the client to ask for more time and budget. "
