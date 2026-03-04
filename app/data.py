@@ -204,6 +204,25 @@ ARTIFACTS = {
                     ),
                 },
                 {
+                    "heading": "Data Model",
+                    "body": (
+                        "The schema was designed around the pipeline, not retrofitted to it. "
+                        "AI_DOC_MANAGER is the intake table — every document entering the system gets a record here "
+                        "before any processing begins. It tracks source, amount, and processing timestamps independently "
+                        "of the business records. "
+                        "BUSINESS and BUSINESS_DATA are deliberately split: BUSINESS holds the lightweight header "
+                        "(document type, claim status, key dates) while BUSINESS_DATA holds the full detail record. "
+                        "This keeps the header queryable without pulling the full payload. "
+                        "AI result fields — AI_STATUS, AI_CLAIM, AI_NOTES, AI_AMOUNT, AI_MATCH, AI_APPROVED — "
+                        "live directly inside BUSINESS_DATA alongside the business data, not in a separate AI table. "
+                        "This was intentional: every payment record carries its own AI decision audit trail, "
+                        "so reconciliation and review don't require joins across systems. "
+                        "REIMBURSEMENT_ALLOWANCE and SETTLEMENT are separate entities — financial calculations "
+                        "are not embedded in the main record. The multi-party model (CLIENT, INSURANCE, BILL_PARTY, PARTY) "
+                        "cleanly separates who is involved in a claim from what happened to it."
+                    ),
+                },
+                {
                     "heading": "What's Hard",
                     "body": (
                         "The decision graph has 15+ nodes and 30+ edges with conditional guards. "
