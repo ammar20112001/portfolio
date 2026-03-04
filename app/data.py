@@ -110,6 +110,32 @@ PROJECTS = [
         ],
         "github": None,
     },
+    {
+        "title": "Real-Time Speech Translation Web Application",
+        "tags": ["Google Speech-to-Text", "Google TTS", "OpenAI", "Streamlit", "Hugging Face Spaces"],
+        "summary": "Multilingual speech-to-speech translation for medical and enterprise contexts where terminology accuracy matters.",
+        "highlights": [
+            "End-to-end pipeline: real-time audio capture → transcription → translation → playback, "
+            "all in a single Streamlit interface hosted on Hugging Face Spaces.",
+            "Integrated Google Speech-to-Text and Text-to-Speech with OpenAI for translation — "
+            "designed for high-stakes contexts (medical, enterprise) where transcription accuracy and "
+            "domain terminology are non-negotiable.",
+        ],
+        "github": "https://github.com/ammar20112001/real-time-speech-translation",
+        "hosted": "https://huggingface.co/spaces/ammar20112001/real-time-speech-translation",
+    },
+    {
+        "title": "Math-Solving LLM with Self-Consistency Decoding (Kaggle AIMO)",
+        "tags": ["deepseek-math-7b-rl", "Self-Consistency", "LLM Fine-tuning", "Kaggle"],
+        "summary": "Enhanced mathematical reasoning on deepseek-math-7b-rl via self-consistency decoding — question rephrasing, answer aggregation.",
+        "highlights": [
+            "Applied self-consistency decoding to deepseek-math-7b-rl: multiple solution paths generated "
+            "via question rephrasing, answers aggregated by majority vote to improve final accuracy.",
+            "Targeted the Kaggle AIMO competition benchmark — focused on improving solution derivation "
+            "quality on challenging mathematical reasoning tasks.",
+        ],
+        "github": "https://github.com/ammar20112001/kaggle-aimo-math-llm",
+    },
 ]
 
 SKILLS = {

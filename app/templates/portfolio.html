@@ -185,11 +185,14 @@
       <p class="modal-body">{{ h }}</p>
     </div>
     {% endfor %}
-    {% if project.github %}
-    <div style="margin-top: 24px;">
+    <div style="margin-top: 24px; display: flex; gap: 20px; flex-wrap: wrap;">
+      {% if project.github %}
       <a href="{{ project.github }}" target="_blank" class="modal-link">View on GitHub →</a>
+      {% endif %}
+      {% if project.get("hosted") %}
+      <a href="{{ project.hosted }}" target="_blank" class="modal-link">Live demo →</a>
+      {% endif %}
     </div>
-    {% endif %}
   </div>
   {% endfor %}
 
